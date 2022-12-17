@@ -1,4 +1,4 @@
-# day 1 - 5
+# day 1 - 7
 import time
 import random
 import Resourses
