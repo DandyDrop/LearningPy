@@ -1,11 +1,51 @@
 import requests
-response = requests.get('https://raw.githubusercontent.com/danakt/russian-words/master/russian.txt')
 
-text = response.content.decode('cp1251')
-text_list = text[200:].splitlines()
-word_list_ru = []
-for i in range(len(text_list)):
-    if i % 800 == 0: word_list_ru.append(text_list[i].lower())
+def create_word_list_ru(every_x_th):
+    """list_all length = 1532601, so recommended every_x_th - more than 1000"""
+    response = requests.get('https://raw.githubusercontent.com/danakt/russian-words/master/russian.txt')
+    text = response.content.decode('cp1251')
+    list_all = text[200:].splitlines()
+    word_list_ru = []
+    counter = 0
+    while not counter >= len(list_all) - 1:
+        word_list_ru.append(list_all[counter].lower())
+        counter += every_x_th
+    print(len(list_all))
+    return word_list_ru
+
+
+def create_word_list_en(every_x_th):
+    """list_all length = 370077, so recommended every_x_th - more than 500"""
+    response = requests.get('https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt')
+    text = response.content.decode()
+    list_all = text[211:].splitlines()
+    word_list_en = []
+    counter = 0
+    while not counter >= len(list_all) - 1:
+        word_list_en.append(list_all[counter].lower())
+        counter += every_x_th
+    print(len(list_all))
+    return word_list_en
+
+def create_word_list_en_easy(every_x_th):
+    """
+    returns a list only of words that have length 5
+    list_all length = 10173, so recommended every_x_th - more than 100
+    """
+    response = requests.get('https://raw.githubusercontent.com/digitalronin/wordle/main/data/valid-words.txt')
+    text = response.content.decode()
+    list_all = text.splitlines()
+    word_list_en = []
+    counter = 0
+    while not counter >= len(list_all) - 1:
+        word_list_en.append(list_all[counter].lower())
+        counter += 50
+    print(len(list_all))
+    return word_list_en
+
+create_word_list_ru(10000)
+create_word_list_en(10000)
+create_word_list_en_easy(1000)
 
 logo = ''' 
  _                                             
@@ -17,218 +57,3 @@ logo = '''
                     __/ |                      
                    |___/    '''
 
-word_list_en = [
-'abruptly',
-'absurd',
-'abyss',
-'affix',
-'askew',
-'avenue',
-'awkward',
-'axiom',
-'azure',
-'bagpipes',
-'bandwagon',
-'banjo',
-'bayou',
-'beekeeper',
-'bikini',
-'blitz',
-'blizzard',
-'boggle',
-'bookworm',
-'boxcar',
-'boxful',
-'buckaroo',
-'buffalo',
-'buffoon',
-'buxom',
-'buzzard',
-'buzzing',
-'buzzwords',
-'caliph',
-'cobweb',
-'cockiness',
-'croquet',
-'crypt',
-'curacao',
-'cycle',
-'daiquiri',
-'dirndl',
-'disavow',
-'dizzying',
-'duplex',
-'dwarves',
-'embezzle',
-'equip',
-'espionage',
-'euouae',
-'exodus',
-'faking',
-'fishhook',
-'fixable',
-'fjord',
-'flapjack',
-'flopping',
-'fluffiness',
-'flyby',
-'foxglove',
-'frazzled',
-'frizzled',
-'fuchsia',
-'funny',
-'gabby',
-'galaxy',
-'galvanize',
-'gazebo',
-'giaour',
-'gizmo',
-'glowworm',
-'glyph',
-'gnarly',
-'gnostic',
-'gossip',
-'grogginess',
-'haiku',
-'haphazard',
-'hyphen',
-'iatrogenic',
-'icebox',
-'injury',
-'ivory',
-'ivy',
-'jackpot',
-'jaundice',
-'jawbreaker',
-'jaywalk',
-'jazziest',
-'jazzy',
-'jelly',
-'jigsaw',
-'jinx',
-'jiujitsu',
-'jockey',
-'jogging',
-'joking',
-'jovial',
-'joyful',
-'juicy',
-'jukebox',
-'jumbo',
-'kayak',
-'kazoo',
-'keyhole',
-'khaki',
-'kilobyte',
-'kiosk',
-'kitsch',
-'kiwifruit',
-'klutz',
-'knapsack',
-'larynx',
-'lengths',
-'lucky',
-'luxury',
-'lymph',
-'marquis',
-'matrix',
-'megahertz',
-'microwave',
-'mnemonic',
-'mystify',
-'naphtha',
-'nightclub',
-'nowadays',
-'numbskull',
-'nymph',
-'onyx',
-'ovary',
-'oxidize',
-'oxygen',
-'pajama',
-'peekaboo',
-'phlegm',
-'pixel',
-'pizazz',
-'pneumonia',
-'polka',
-'pshaw',
-'psyche',
-'puppy',
-'puzzling',
-'quartz',
-'queue',
-'quips',
-'quixotic',
-'quiz',
-'quizzes',
-'quorum',
-'razzmatazz',
-'rhubarb',
-'rhythm',
-'rickshaw',
-'schnapps',
-'scratch',
-'shiv',
-'snazzy',
-'sphinx',
-'spritz',
-'squawk',
-'staff',
-'strength',
-'strengths',
-'stretch',
-'stronghold',
-'stymied',
-'subway',
-'swivel',
-'syndrome',
-'thriftless',
-'thumbscrew',
-'topaz',
-'transcript',
-'transgress',
-'transplant',
-'triphthong',
-'twelfth',
-'twelfths',
-'unknown',
-'unworthy',
-'unzip',
-'uptown',
-'vaporize',
-'vixen',
-'vodka',
-'voodoo',
-'vortex',
-'voyeurism',
-'walkway',
-'waltz',
-'wave',
-'wavy',
-'waxy',
-'wellspring',
-'wheezy',
-'whiskey',
-'whizzing',
-'whomever',
-'wimpy',
-'witchcraft',
-'wizard',
-'woozy',
-'wristwatch',
-'wyvern',
-'xylophone',
-'yachtsman',
-'yippee',
-'yoked',
-'youthful',
-'yummy',
-'zephyr',
-'zigzag',
-'zigzagging',
-'zilch',
-'zipper',
-'zodiac',
-"zombie",
-]
