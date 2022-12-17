@@ -223,4 +223,325 @@ def whosACapitalistSlave():
         # or we can use the "choice" function that will pick a random object of a list or something else
         print(f"Today {random.choice(names)} is paying! The fucking capitalist!")
 
-whosACapitalistSlave()
+def treasureMap():
+    while True:
+        print("\n\n  a    b     c")
+        row1 = ["N", "N", "N"]               # a1 - map[0][0]
+        row2 = ["N", "N", "N"]               # c2 - map[1][2]
+        row3 = ["N", "N", "N"]
+        map = [row1, row2, row3]
+        print(f"{row1}\n{row2}\n{row3}\n")
+        choice1 = input("Gamer1, choose the tile that u want to place the X on. E.g. - a2 or b1 or c3.\nIf u want to place "
+                       "multiple - type it separated by a comma >\n")
+        print(choice1[1])
+
+        place(map, choice1, "X")
+
+        print(f"\n\n{row1}\n{row2}\n{row3}\n")
+
+        choice2 = input("Gamer2, choose the tile that u want to place the 0 on. E.g. - a2 or b1 or c3.\nIf u want to place "
+                        "multiple - type it separated by a comma >\n")
+
+        place(map, choice2, "0")
+
+        print(f"\n\n{row1}\n{row2}\n{row3}\n")
+        time.sleep(10)
+
+def place(map, choice, symbol):
+    choice_final = choice.split(", ")
+    for i in range(len(choice_final)):
+        if choice_final[i].count("a") != 0:
+            peek_column = 0
+        elif choice_final[i].count("b") != 0:
+            peek_column = 1
+        elif choice_final[i].count("c") != 0:
+            peek_column = 2
+        else:
+            print(error_message)
+            treasureMap()
+
+        if choice_final[i].count("1") != 0:
+            peek_row = 0
+        elif choice_final[i].count("2") != 0:
+            peek_row = 1
+        elif choice_final[i].count("3") != 0:
+            peek_row = 2
+        else:
+            print(error_message)
+            treasureMap()
+
+        map[peek_row][peek_column] = symbol
+
+def RPS():
+    while True:
+        print("\n\nWELCOME TO THE RPS GAME! STAAAAAAAAAAAAARTING!")
+        pc_choice = random.randint(0, 2)
+        user_choice = int(input("Choose 0 for rock, 1 for paper and 2 for scissors "))
+
+        rock = """
+            _______
+        ---'   ____)
+              (_____)
+              (_____)
+              (____)
+        ---.__(___)
+        """
+
+        paper = """
+             _______
+        ---'    ____)____
+                   ______)
+                  _______)
+                 _______)
+        ---.__________)
+        """
+
+        scissors = """
+            _______
+        ---'   ____)____
+                  ______)
+               __________)
+              (____)
+        ---.__(___)
+        """
+
+        all_choices = [rock, paper, scissors]
+
+        if (user_choice != 0) and (user_choice != 1) and (user_choice != 2):
+            print(error_message)
+            RPS()
+
+        if pc_choice == user_choice:
+            print(f"U chose > \n{all_choices[user_choice]}")
+            print(f"Computer chose:\n{all_choices[pc_choice]}\n\nDraw")
+        elif pc_choice == 0 and user_choice == 1 or (pc_choice == 1 and user_choice == 2) or (
+                pc_choice == 2 and user_choice == 0):
+            print(f"U chose > \n{all_choices[user_choice]}")
+            print(f"Computer chose:\n{all_choices[pc_choice]}\n\nU won")
+        else:
+            print(f"U chose > \n{all_choices[user_choice]}")
+            print(f"Computer chose:\n{all_choices[pc_choice]}\n\nU lost")
+
+        # or
+
+
+        if user_choice == 0:
+            print(f"U chose > \n{rock}")
+            if pc_choice == 0:
+                print(f"Computer chose:\n{rock}\n\nDRAW, ROCK WITH ROCK GOT TO THE STOCK ;( ")
+            elif pc_choice == 1:
+                print(f"Computer chose:\n{paper}\n\nU LOSE ;( Paper worked as a craper")
+            else:
+                print(f"Computer chose:\n{scissors}\n\nU WON! YEEEEEEEEEEEEEEEEEEEE")
+
+        elif user_choice == 1:
+            print(f"U chose > \n{paper}")
+            if pc_choice == 0:
+                print(f"Computer chose:\n{rock}\n\nU WON! YEEEEEEEEEEEEEEEEEEEE")
+            elif pc_choice == 1:
+                print(f"Computer chose:\n{paper}\n\nTHERE IS THE DRAW! THERE IS THE PAPER GETTING TO THE ANAL!")
+            else:
+                print(f"Computer chose:\n{scissors}\n\nU LOSE ;( Scissors look good as a winners")
+
+        elif user_choice == 2:
+            print(f"U chose > \n{scissors}")
+            if pc_choice == 0:
+                print(f"Computer chose:\n{rock}\n\nU LOSE ;(")
+            elif pc_choice == 1:
+                print(f"Computer chose:\n{paper}\n\nU won")
+            else:
+                print(f"Computer chose:\n{scissors}\n\nDraw")
+        else:
+            print(error_message)
+            RPS()
+
+def RPSMASHA():
+    while True:
+        print("\n\nWELCOME TO THE RPS GAME! STAAAAAAAAAAAAARTING!")
+        user_choice = int(input("Choose 0 for rock, 1 for paper and 2 for scissors "))
+        if user_choice == 0:
+            pc_choise = 1
+        elif user_choice == 1:
+            pc_choise = 2
+        elif user_choice == 2:
+            pc_choise = 0
+        else:
+            print(error_message)
+            RPS()
+
+
+
+
+        rock = """
+                    _______
+                ---'   ____)
+                      (_____)
+                      (_____)
+                      (____)
+                ---.__(___)
+                """
+
+        paper = """
+                     _______
+                ---'    ____)____
+                           ______)
+                          _______)
+                         _______)
+                ---.__________)
+                """
+
+        scissors = """
+                    _______
+                ---'   ____)____
+                          ______)
+                       __________)
+                      (____)
+                ---.__(___)
+                """
+
+        all_choices = [rock, paper, scissors]
+
+        print(f"U chose > \n{all_choices[user_choice]}\n, but computer chose: \n{all_choices[pc_choise]}\n\nSo u lose. "
+              f"But don`t worry, then u will win in a bedroom fight!")
+
+
+def averageHeight():
+    while True:
+        all_heights = []
+        length = int(input("Welcome to the average height calculator! Enter the length "
+                           "of random list of heights (>0) > "))
+        for i in range(length):
+            all_heights.append(random.randint(150, 200))
+
+        # the rule was that I can`t use the sum() or len() functions
+        sum_height = 0
+        len_counter = 0
+
+        print(all_heights)
+
+        for i in all_heights:
+            sum_height += i
+            len_counter += 1
+
+        average_height = sum_height / len_counter
+        print(f"The average height ~ {round(average_height)}")
+
+        # the solution with sum() and len()
+        average_height = sum(all_heights) / len(all_heights)
+        print(f"The average height ~ {round(average_height)}")
+        # or even
+        print(f"The average height ~ {round(sum(all_heights) / len(all_heights))}")
+
+def maxScore():
+    while True:
+        all_scores = []
+        length = int(input("Welcome to the average max score searcher! Enter the length "
+                           "of random list of heights (>0) > "))
+        for i in range(length):
+            all_scores.append(random.randint(1, 100))
+
+        max = 0
+
+        for score in all_scores:
+            if max < score:
+                max = score
+
+        print(all_scores)
+        print(f"The max score is - {max}")
+
+# recursion method:
+def maxScore1(Array):
+    print(ezer(Array, 0, 0))
+def ezer(Array, max, index):
+    if index == len(Array):
+        return max
+    if Array[index] > max:
+        max = Array[index]
+    return ezer(Array, max, index + 1)
+
+
+def sumEv(min, max):
+    sum = 0
+    for num in range(min, max+1):
+        if num % 2 == 0:
+           sum += num
+    return sum
+
+    # or if we know that min is odd (e.g. 1 - 100):
+
+    # for num in range (2, 101, 2):
+    #     sum += num
+    #
+    # return 1 + sum
+
+# Fizz Buzz game 1 - 100
+def fizzBuzz():
+    for num in range(1, 101):
+        if num % 3 == 0 and num % 5 == 0:
+            print("FizzBuzz")
+        elif num % 5 == 0:
+            print("Buzz")
+        elif num % 3 == 0:
+            print("Fizz")
+        else:
+            print(num)
+
+def passGenerator():
+    while True:
+        letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+                   's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+                   'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+        numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        symbols = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "~", "`"]
+        final_pass = []
+        final_print = ""
+        print("\n\nWelcome to the pass generator!")
+        nr_letters = int(input("How many letters would u like in ur pass? (Type - 1 if u want to see completely random "
+                               "pass) > "))
+        if nr_letters == -1:
+            final_char = letters + numbers + symbols + numbers
+            for char in range(random.randint(5, 25)):
+                final_pass.append(str(final_char[random.randint(0, len(final_char) - 1)]))
+        else:
+
+            nr_symbols = int(input("How mane symbols would u like in ur pass? > "))
+            nr_nums = int(input("How mane nums would u like in ur pass? > "))
+
+
+            # with choice() and shuffle()
+            for i in range(nr_letters):
+                final_pass.append(random.choice(letters))
+            for i in range(nr_symbols):
+                final_pass.append(random.choice(symbols))
+            for i in range(nr_nums):
+                final_pass.append(str(random.choice(numbers)))
+
+            random.shuffle(final_pass)
+
+
+            # with choice()
+            # for i in range(nr_letters):
+            #     final_pass.insert(random.randint(0, len(final_pass) - 1), random.choice(letters))
+            # for i in range(nr_symbols):
+            #     final_pass.insert(random.randint(0, len(final_pass) - 1), random.choice(symbols))
+            # for i in range(nr_nums):
+            #     final_pass.insert(random.randint(0, len(final_pass) - 1), random.choice(numbers))
+
+            # without choice() and shuffle()
+            # for i in range(nr_letters):
+            #     final_pass.append(letters[random.randint(0, len(letters) - 1)])
+            # for i in range(nr_symbols):
+            #     final_pass.insert(random.randint(0, len(final_pass) - 1), symbols[random.randint(0, len(symbols) - 1)])
+            # for i in range(nr_nums):
+            #     final_pass.insert(random.randint(0, len(final_pass) - 1), str(numbers[random.randint(0, len(numbers) - 1)]))
+
+        for char in final_pass:
+            final_print += char
+        print(final_print)
+
+def reorderList():
+    mylist = ["a", "b", "c", "d"]
+    order = [3, 2, 0, 1]
+    mylist1 = [mylist[index] for index in order]
+    print(mylist)
+    print(mylist1)
