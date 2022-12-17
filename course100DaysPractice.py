@@ -1,6 +1,7 @@
 # day 1 - 5
 import time
 import random
+import Resourses
 
 error_message = "I don`t understand u, try again please"
 
@@ -545,3 +546,59 @@ def reorderList():
     mylist1 = [mylist[index] for index in order]
     print(mylist)
     print(mylist1)
+
+    
+
+words = Resourses.word_list_ru
+def hangman(words):
+    while True:
+        print(f"\n\n{Resourses.logo}")
+        goal_characters = []
+        guesses_letters = []
+        counter = 0
+        stages = ["без веревки", "веревка уже в руках у палача", "одели веревку", "повесили",
+                  "задыхается", "в страшних муках", "почти умер", "умер ;("]
+        word = random.choice(words)
+        print(len(words))
+        words.remove(word)
+        print(len(words))
+        for character in word:
+            if goal_characters.count(character) == 0:
+                goal_characters.append(character)
+        while len(goal_characters) > len(guesses_letters) and counter < len(stages):
+            st = ""
+            letter = input("Введите букву > ").lower()
+            if letter in guesses_letters:
+                print("Вы уже вводили эту букву. Попробуйте ещё")
+            elif letter in word:
+                print("Правильно! Осталось еще немного, вперед!")
+                guesses_letters.append(letter)
+            else:
+                counter += 1
+                print(f"Неверно ;( , {stages[counter]}")
+
+            for character in word:
+                if character in guesses_letters:
+                    st += (character + " ")
+                else:
+                    st += "_ "
+            print(st)
+
+        if counter < len(stages):
+            print(f"Вы победили! Вы отгадали слово '{word}'")
+        else:
+            print(f"Вы проиграли ;( Но ничего, попробуйте ещё раз! ;) Загаданное слово: '{word}'")
+
+def upgradeString(string):
+    st = ""
+    words = string.split(" ")
+    for word in words:
+        for i in range(len(word)):
+            if word[i] == "," or word[i] == "." or word[i] == ")" or word[i] == ";": st += word[i]
+            elif i % 5 != 0:
+                st += word[i] + " "
+            else:
+                st += "* "
+        st += " "
+    return st
+
