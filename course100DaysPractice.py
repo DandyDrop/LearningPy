@@ -2,6 +2,7 @@
 import time
 import random
 import Resourses
+import pyautogui
 
 error_message = "I don`t understand u, try again please"
 
@@ -549,26 +550,33 @@ def reorderList():
 
     
 
-words = Resourses.word_list_ru
 def hangman(words):
     while True:
         print(f"\n\n{Resourses.logo}")
         goal_characters = []
         guesses_letters = []
+        entered_letters = []
         counter = 0
         stages = ["без веревки", "веревка уже в руках у палача", "одели веревку", "повесили",
                   "задыхается", "в страшних муках", "почти умер", "умер ;("]
         word = random.choice(words)
-        print(len(words))
         words.remove(word)
-        print(len(words))
         for character in word:
             if goal_characters.count(character) == 0:
                 goal_characters.append(character)
-        while len(goal_characters) > len(guesses_letters) and counter < len(stages):
+        while len(goal_characters) > len(guesses_letters) and counter < len(stages) - 1:
             st = ""
+            for character in word:
+                if character in guesses_letters:
+                    st += (character + " ")
+                else:
+                    st += "_ "
+            print(st)
             letter = input("Введите букву > ").lower()
-            if letter in guesses_letters:
+            pyautogui.hotkey('ctrl', 'space')
+            time.sleep(0.2)
+            print(f"\n\n{Resourses.logo}\n")
+            if letter in entered_letters:
                 print("Вы уже вводили эту букву. Попробуйте ещё")
             elif letter in word:
                 print("Правильно! Осталось еще немного, вперед!")
@@ -576,18 +584,12 @@ def hangman(words):
             else:
                 counter += 1
                 print(f"Неверно ;( , {stages[counter]}")
+            if letter not in entered_letters: entered_letters.append(letter)
 
-            for character in word:
-                if character in guesses_letters:
-                    st += (character + " ")
-                else:
-                    st += "_ "
-            print(st)
-
-        if counter < len(stages):
+        if counter < len(stages) - 1:
             print(f"Вы победили! Вы отгадали слово '{word}'")
         else:
-            print(f"Вы проиграли ;( Но ничего, попробуйте ещё раз! ;) Загаданное слово: '{word}'")
+            print(f"\nВы проиграли ;( Но ничего, попробуйте ещё раз! ;)\nЗагаданное слово: '{word}'")
 
 def upgradeString(string):
     st = ""
