@@ -550,9 +550,12 @@ def reorderList():
 
     
 
+words = Resourses.create_word_list_ru()
 def hangman(words):
     while True:
-        print(f"\n\n{Resourses.logo}")
+        clear(1)
+        print(f"\n{Resourses.logo}\n")
+        message = "НЕ подошли: "
         goal_characters = []
         guesses_letters = []
         entered_letters = []
@@ -573,9 +576,8 @@ def hangman(words):
                     st += "_ "
             print(st)
             letter = input("Введите букву > ").lower()
-            pyautogui.hotkey('ctrl', 'space')
-            time.sleep(0.2)
-            print(f"\n\n{Resourses.logo}\n")
+            clear(0.2)
+            print(f"\n{Resourses.logo}\n")
             if letter in entered_letters:
                 print("Вы уже вводили эту букву. Попробуйте ещё")
             elif letter in word:
@@ -583,9 +585,12 @@ def hangman(words):
                 guesses_letters.append(letter)
             else:
                 counter += 1
+                message += " " + letter
                 print(f"Неверно ;( , {stages[counter]}")
+            if len(message) > 12: print(message)
             if letter not in entered_letters: entered_letters.append(letter)
 
+        clear(0.2)
         if counter < len(stages) - 1:
             print(f"Вы победили! Вы отгадали слово '{word}'")
         else:
@@ -597,10 +602,8 @@ def upgradeString(string):
     for word in words:
         for i in range(len(word)):
             if word[i] == "," or word[i] == "." or word[i] == ")" or word[i] == ";": st += word[i]
-            elif i % 5 != 0:
-                st += word[i] + " "
-            else:
-                st += "* "
+            elif i % 5 != 0: st += word[i] + " "
+            else: st += "* "
         st += " "
     return st
 
